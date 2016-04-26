@@ -100,7 +100,7 @@ if [ "`grep -q -i sha512sum "$tmp_dir""youtube-dl" \
 	# move our file and chmod it
 	mv "$tmp_dir""youtube-dl" "/usr/local/bin/youtube-dl"
 	chmod +x "/usr/local/bin/youtube-dl"
-	if [ "$current_version" == "NULL" ]; then
+	if [ "$current_version" = "NULL" ]; then
 		echo "youtube-dl version $remote_version installed"
 	else
 		echo "youtube-dl updated from version $current_version to $remote_version"
