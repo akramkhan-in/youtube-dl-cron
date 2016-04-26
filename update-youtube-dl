@@ -14,7 +14,7 @@ done
 
 
 # check if date is going to work
-if [ ! date +'%N' | grep -q -o -E '[0-9]{9}' ]; then
+if [ -z "`date +'%N' | grep -o -E '[0-9]{9}'`" ]; then
 	echo "Failed to get nanoseconds with date. exiting with status 1"
 	exit 1
 fi
