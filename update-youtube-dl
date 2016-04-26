@@ -13,12 +13,15 @@ for i in wget grep chmod rm; do
 done
 
 
-# we need a directory in tmp to work with
-tmp_dir="/tmp/youtube-dl-cron-""`date +'%N'`""/"
-if [ "$?" != "0" ]; then
+# check if date is going to work
+if [ ! date +'%N' | grep -q -o -E '[0-9]{9}' ]; then
 	echo "Failed to get nanoseconds with date. exiting with status 1"
 	exit 1
 fi
+
+
+# we need a directory in tmp to work with
+tmp_dir="/tmp/youtube-dl-cron-""`date +'%N'`""/"
 mkdir "$tmp_dir"
 if [ ! -d "$tmp_dir" ]; then
 	echo "Failed to create /tmp/youtube-dl-cron/, exiting with status 1"
