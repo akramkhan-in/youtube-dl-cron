@@ -15,7 +15,7 @@ done
 
 # we need a directory in tmp to work with
 tmp_dir="/tmp/youtube-dl-cron-""`date +'%N'`""/"
-if [ "$?" != "0"]; then
+if [ "$?" != "0" ]; then
 	echo "Failed to get nanoseconds with date. exiting with status 1"
 	exit 1
 fi
