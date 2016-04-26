@@ -5,7 +5,7 @@ set -e
 
 
 # do we have the commands we need
-for i in wget grep chmod rm; do
+for i in wget grep chmod rm mktemp; do
 	if [ -z "`command -v $i`" ]; then
 		echo "Command $i not availabled, exiting with status 1"
 		exit 1
@@ -13,18 +13,11 @@ for i in wget grep chmod rm; do
 done
 
 
-# check if date is going to work
-if [ -z "`date +'%N' | grep -o -E '[0-9]{9}'`" ]; then
-	echo "Failed to get nanoseconds with date. exiting with status 1"
-	exit 1
-fi
-
-
 # we need a directory in tmp to work with
-tmp_dir="/tmp/youtube-dl-cron-""`date +'%N'`""/"
+tmp_dir="`mktemp -d`""/"
 mkdir "$tmp_dir"
 if [ ! -d "$tmp_dir" ]; then
-	echo "Failed to create /tmp/youtube-dl-cron/, exiting with status 1"
+	echo "Failed to create $tmp_dir, exiting with status 1"
 	exit 1
 fi
 
