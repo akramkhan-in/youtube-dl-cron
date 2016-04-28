@@ -6,7 +6,7 @@ set -e
 
 # do we have the commands we need
 for i in wget grep chmod rm mktemp; do
-	if [ -z "`command -v $i`" ]; then
+	if [ -z "$(command -v $i)" ]; then
 		echo "Command ${i} not availabled, exiting with status 1"
 		exit 1
 	fi
@@ -14,7 +14,7 @@ done
 
 
 # we need a directory in tmp to work with
-tmp_dir="`mktemp -d`/"
+tmp_dir="$(mktemp -d)/"
 if [ ! -d "$tmp_dir" ]; then
 	echo "Failed to create ${tmp_dir}, exiting with status 1"
 	exit 1
@@ -41,9 +41,9 @@ fi
 
 
 # get the current version and store it
-if [ -n "`command -v youtube-dl`" ]; then
-	current_version="`youtube-dl --version \
-	                | grep -o -E '[0-9]{4}\.[0-9]{2}\.[0-9]{2}'`"
+if [ -n "$(command -v youtube-dl)" ]; then
+	current_version="$(youtube-dl --version \
+	                | grep -o -E '[0-9]{4}\.[0-9]{2}\.[0-9]{2}')"
 	if [ -z "$current_version" ]; then
 		current_version="NULL"
 	fi
@@ -64,8 +64,8 @@ fi
 
 # compare the current version with the next
 if [ "$current_version" != "NULL" ]; then
-	remote_version="`grep -o -E '[0-9]{4}\.[0-9]{2}\.[0-9]{2}' \
-		       "${tmp_dir}sha2-512sums"`"
+	remote_version="$(grep -o -E '[0-9]{4}\.[0-9]{2}\.[0-9]{2}' \
+		       "${tmp_dir}sha2-512sums")"
 	if [ -z "$remote_version" ]; then
 		echo "Couldn't get remote version, exiting with status 1"
 		clean_exit 1
@@ -87,8 +87,8 @@ fi
 
 
 # sha has to match
-if [ "`grep -q -i sha512sum "${tmp_dir}youtube-dl" \
-   | awk '{print $1}' "${tmp_dir}sha2-512sums"`" ]; then
+if [ "$(grep -q -i sha512sum "${tmp_dir}youtube-dl" \
+   | awk '{print $1}' "${tmp_dir}sha2-512sums")" ]; then
 	# move our file and chmod it
 	mv "${tmp_dir}youtube-dl" "/usr/local/bin/youtube-dl"
 	chmod +x "/usr/local/bin/youtube-dl"
