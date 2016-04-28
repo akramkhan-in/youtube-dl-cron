@@ -97,6 +97,9 @@ if [ "`grep -q -i sha512sum "${tmp_dir}youtube-dl" \
 	else
 		echo "youtube-dl updated from version ${current_version} to ${remote_version}"
 	fi
+else
+	echo "Checksum did not match! Exiting with status 1"
+	clean_exit 1
 fi
 
 
