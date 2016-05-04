@@ -54,7 +54,7 @@ fi
 
 
 # fetch the sha so we can check the the version
-wget -q -4 "https://yt-dl.org/downloads/latest/SHA2-512SUMS" \
+wget -q -4 -T 180 "https://yt-dl.org/downloads/latest/SHA2-512SUMS" \
 -O "${tmp_dir}sha2-512sums"
 if [ "$?" != "0" ]; then
 	echo "Couldn't fetch sha2-512sums, exiting with status 1"
@@ -78,7 +78,7 @@ fi
 
 
 # fetch the files we need
-wget -q -4 "https://yt-dl.org/downloads/latest/youtube-dl" \
+wget -q -4 -T 180 "https://yt-dl.org/downloads/latest/youtube-dl" \
 -O "${tmp_dir}youtube-dl"
 if [ "$?" != "0" ]; then
 	echo "Couldn't fetch youtube-dl, exiting with status 1"
