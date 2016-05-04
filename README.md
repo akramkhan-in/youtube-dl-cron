@@ -1,5 +1,5 @@
-# youtube-dl-cron
-Cron shell script for automatically updating youtube-dl
+# Description
+youtube-dl-cron is a cron script that automatically updates youtube-dl when a new version is released.
 
 # Installation
 chmod +x update-youtube-dl
