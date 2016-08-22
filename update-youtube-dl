@@ -33,6 +33,10 @@ clean_exit() {
 }
 
 
+# trap unexpected terminations of the script and clean up
+trap clean_exit SIGHUP SIGINT SIGTERM
+
+
 # we need a local bin to move to
 if [ ! -d "/usr/local/bin/" ]; then
 	echo "Why don't you have a /usr/local/bin/?, exiting with status 1"
