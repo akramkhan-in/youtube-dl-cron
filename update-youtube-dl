@@ -34,7 +34,8 @@ clean_exit() {
 
 
 # trap unexpected terminations of the script and clean up
-trap clean_exit SIGHUP SIGINT SIGTERM
+trap 'exit 1' HUP INT TERM QUIT
+trap 'clean_exit 1' EXIT
 
 
 # we need a local bin to move to
