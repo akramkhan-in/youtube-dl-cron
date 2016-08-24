@@ -22,20 +22,29 @@ fi
 
 
 clean_exit() {
+	# Remove temporary directory
 	if [ -d "$tmp_dir" ]; then
 		rm -r "$tmp_dir"
 	fi
-	if [ -z "$1" ]; then
-		exit 1
+
+	# Ignore the EXIT signal for trap
+	trap '' EXIT
+
+
+	if [ "$?" = "1" ]; then
+		exit "1"
+	elif [ -z "$1" ]; then
+		exit "1"
 	else
 		exit "$1"
 	fi
 }
 
 
+
 # trap unexpected terminations of the script and clean up
-trap 'exit 1' HUP INT TERM QUIT
-trap 'clean_exit 1' EXIT
+trap 'exit 1' HUP INT QUIT TERM
+trap 'clean_exit' EXIT
 
 
 # we need a local bin to move to
