@@ -106,6 +106,7 @@ if [ "$(grep -q -i sha512sum "${tmp_dir}youtube-dl" \
 	chmod +x "/usr/local/bin/youtube-dl"
 	if [ "$current_version" = "NULL" ]; then
 		echo "youtube-dl version ${remote_version} installed"
+		exit "0"
 	else
 		echo "youtube-dl updated from version ${current_version} to ${remote_version}"
 		exit "0"
