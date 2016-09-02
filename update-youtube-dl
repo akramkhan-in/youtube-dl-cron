@@ -21,7 +21,7 @@ if [ ! -d "$tmp_dir" ]; then
 fi
 
 
-clean_exit() {
+clean_up() {
 	# Remove temporary directory
 	if [ -d "$tmp_dir" ]; then
 		rm -r "$tmp_dir"
@@ -30,13 +30,11 @@ clean_exit() {
 	# Ignore the EXIT signal for trap
 	trap '' EXIT
 
-
-	if [ "$?" = "1" ]; then
-		exit "1"
-	elif [ -z "$1" ]; then
-		exit "1"
+	# if we have exit code exit with it if we don't use 255
+	if [ -n "$?" ]; then
+		exit "$?"
 	else
-		exit "$1"
+		exit "255"
 	fi
 }
 
@@ -44,13 +42,13 @@ clean_exit() {
 
 # trap unexpected terminations of the script and clean up
 trap 'exit 1' HUP INT QUIT TERM
-trap 'clean_exit' EXIT
+trap 'clean_up' EXIT
 
 
 # we need a local bin to move to
 if [ ! -d "/usr/local/bin/" ]; then
 	echo "Why don't you have a /usr/local/bin/?, exiting with status 1"
-	clean_exit 1
+	exit "1"
 fi
 
 
@@ -72,7 +70,7 @@ wget -q -4 -T 180 "https://yt-dl.org/downloads/latest/SHA2-512SUMS" \
 -O "${tmp_dir}sha2-512sums"
 if [ "$?" != "0" ]; then
 	echo "Couldn't fetch sha2-512sums, exiting with status 1"
-	clean_exit 1
+	exit "1"
 fi
 
 
@@ -82,11 +80,11 @@ if [ "$current_version" != "NULL" ]; then
 		       "${tmp_dir}sha2-512sums")"
 	if [ -z "$remote_version" ]; then
 		echo "Couldn't get remote version, exiting with status 1"
-		clean_exit 1
+		exit "1"
 	fi
 	if [ "$current_version" = "$remote_version" ]; then
 		# we're up to date exit cleanly
-		clean_exit 0
+		exit "0"
 	fi
 fi
 
@@ -96,7 +94,7 @@ wget -q -4 -T 180 "https://yt-dl.org/downloads/latest/youtube-dl" \
 -O "${tmp_dir}youtube-dl"
 if [ "$?" != "0" ]; then
 	echo "Couldn't fetch youtube-dl, exiting with status 1"
-	clean_exit 1
+	exit "1"
 fi
 
 
@@ -110,11 +108,10 @@ if [ "$(grep -q -i sha512sum "${tmp_dir}youtube-dl" \
 		echo "youtube-dl version ${remote_version} installed"
 	else
 		echo "youtube-dl updated from version ${current_version} to ${remote_version}"
+		exit "0"
 	fi
 else
 	echo "Checksum did not match! Exiting with status 1"
-	clean_exit 1
+	exit "1"
 fi
 
-
-clean_exit 0
