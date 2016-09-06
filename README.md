@@ -2,9 +2,11 @@
 youtube-dl-cron is a cron script that automatically updates youtube-dl when a new version is released.
 
 # Installation
-chmod +x update-youtube-dl
+cd youtube-dl-cron
 
-sudo cp update-youtube-dl /etc/cron.daily/
+sudo cp update-youtube-dl /etc/cron.daily/update-youtube-dl
+
+chmod +x /etc/cron.daily/update-youtube-dl
 
 # Standards
 This project aims to follow the POSIX Standard as closely as possible, specifically:
