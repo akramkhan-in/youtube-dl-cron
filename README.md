@@ -1,14 +1,19 @@
-# Description
+# youtube-dl-cron
+
+## Note
+This repository will be moving to GitLab under the same user name.
+
+## Description
 youtube-dl-cron is a cron script that automatically updates youtube-dl when a new version is released.
 
-# Installation
+## Installation
 cd youtube-dl-cron
 
 sudo cp update-youtube-dl /etc/cron.daily/update-youtube-dl
 
 chmod +x /etc/cron.daily/update-youtube-dl
 
-# Standards
+## Standards
 This project aims to follow the POSIX Standard as closely as possible, specifically:
 
 The Open Group Base Specifications Issue 6
