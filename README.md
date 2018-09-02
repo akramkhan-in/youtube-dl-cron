@@ -1,7 +1,7 @@
 # youtube-dl-cron
 
 ## Note
-This repository will be moving to GitLab under the same user name.
+This repo is currently in the process of moving to GitLab and can be found at: [konomikitten/youtube-dl-cron](https://gitlab.com/konomikitten/youtube-dl-cron).
 
 ## Description
 youtube-dl-cron is a cron script that automatically updates youtube-dl when a new version is released.
