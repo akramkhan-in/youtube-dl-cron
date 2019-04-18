@@ -1,7 +1,5 @@
 # youtube-dl-cron
 
-This repo will be the main repo again for my work and GitLab will be used for a backup, sorry for the confusion.
-
 ## Description
 youtube-dl-cron is a cron script that automatically updates youtube-dl when a new version is released.
 
