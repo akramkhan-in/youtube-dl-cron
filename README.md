@@ -1,8 +1,5 @@
 # youtube-dl-cron
 
-## Note
-~~This repo is currently in the process of moving to GitLab and can be found at: [konomikitten/youtube-dl-cron](https://gitlab.com/konomikitten/youtube-dl-cron).~~
-
 This repo will be the main repo again for my work and GitLab will be used for a backup, sorry for the confusion.
 
 ## Description
